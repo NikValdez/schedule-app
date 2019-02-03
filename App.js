@@ -1,12 +1,12 @@
-import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
-import { ApolloProvider } from 'react-apollo'
 import ApolloClient from 'apollo-boost'
-import Post from './components/Post'
-import navStyles from './components/styles/navStyles'
+import React from 'react'
+import { ApolloProvider } from 'react-apollo'
+import { Button, StyleSheet, View } from 'react-native'
+import { createAppContainer, createStackNavigator } from 'react-navigation'
 import Courses from './components/Courses'
+import Post from './components/Post'
 import Signin from './components/Signin'
+import navStyles from './components/styles/navStyles'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4444',
