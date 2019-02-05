@@ -4,9 +4,11 @@ import { ApolloProvider } from 'react-apollo'
 import { Button, StyleSheet, View } from 'react-native'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import Courses from './components/Courses'
+import MyCourses from './components/MyCourses'
 import Post from './components/Post'
 import Signin from './components/Signin'
 import navStyles from './components/styles/navStyles'
+import { getToken } from './loginUtils'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4444',
@@ -17,6 +19,13 @@ class App extends React.Component {
   static navigationOptions = {
     title: 'Home',
     ...navStyles
+  }
+  componentDidMount() {
+    if (getToken()) {
+      this.props.navigation.navigate('MyCourses')
+    } else {
+      console.log('it doesnt work')
+    }
   }
 
   goToPost = () => {
@@ -29,8 +38,7 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
-          <Courses />
-          <Button onPress={this.goToPost} title="Post page" />
+          <Button onPress={this.goToPost} title="Cal" />
           <Signin />
         </View>
       </ApolloProvider>
@@ -51,7 +59,9 @@ const AppNavigator = createStackNavigator(
   {
     Home: App,
     Post: Post,
-    Signin: Signin
+    Courses: Courses,
+    Signin: Signin,
+    MyCourses: MyCourses
   },
   { initialRouteName: 'Home' }
 )

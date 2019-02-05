@@ -10,6 +10,7 @@
     "@expo/vector-icons": "^9.0.0",
     "apollo-boost": "^0.1.27",
     "apollo-client": "^2.4.12",
+    "apollo-link-context": "^1.0.14",
     "expo": "^32.0.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",

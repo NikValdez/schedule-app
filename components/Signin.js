@@ -1,22 +1,37 @@
 import gql from 'graphql-tag'
+import { Button, Text } from 'native-base'
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-import { Button, StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { login } from '../loginUtils'
+
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
+      id
+      email
+      name
+    }
+  }
+`
 
 class Signin extends Component {
   state = {
     email: '',
     password: ''
   }
+
   submitForm = async e => {
     e.preventDefault()
     const response = await this.props.mutate({
       variables: this.state
     })
     const { payload, error } = response.data.signin
+    console.log(response.data.signin)
+    login(response.data.signin.id)
     this.setState({ email: '', password: '' })
-    this.props.navigation.navigate('Post')
+    this.props.navigation.navigate('MyCourses')
   }
 
   render() {
@@ -36,11 +51,9 @@ class Signin extends Component {
           style={styles.input}
         />
 
-        <Button
-          title={'Login'}
-          style={styles.input}
-          onPress={this.submitForm}
-        />
+        <Button full light onPress={this.submitForm}>
+          <Text>Login</Text>
+        </Button>
       </View>
     )
   }
@@ -53,22 +66,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   input: {
-    width: 200,
+    width: 350,
     padding: 10,
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10
   }
 })
-
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-    signin(email: $email, password: $password) {
-      id
-      email
-      name
-    }
-  }
-`
 
 export default graphql(SIGNIN_MUTATION)(withNavigation(Signin))
