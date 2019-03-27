@@ -28,8 +28,8 @@ class Signin extends Component {
       variables: this.state
     })
     const { payload, error } = response.data.signin
-    console.log(response.data.signin)
-    login(response.data.signin.id)
+    console.log(response.data.signin.id)
+    await login(response.data.signin.id)
     this.setState({ email: '', password: '' })
     this.props.navigation.navigate('MyCourses')
   }
