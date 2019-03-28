@@ -79,7 +79,11 @@ class MyCourses extends Component {
                 {courseData.map(course => (
                   <View key={course.id}>
                     <Card>
-                      <CardItem>
+                      <CardItem
+                        header
+                        button
+                        onPress={() => alert(course.courses.description)}
+                      >
                         <Text>{course.courses.title}</Text>
                         <Right>
                           <Icon name="arrow-forward" />
