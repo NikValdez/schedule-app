@@ -62,6 +62,7 @@ class MyCourses extends Component {
             if (loading) return <Text>Loading...</Text>
             if (error) return <Text>Error :(</Text>
             const courseData = data.me.myCourses.map(course => course)
+
             return (
               <View>
                 <Header
@@ -82,7 +83,7 @@ class MyCourses extends Component {
                       <CardItem
                         header
                         button
-                        onPress={() => alert(course.courses.description)}
+                        // onPress={() => alert(course.courses.description)}
                       >
                         <Text>{course.courses.title}</Text>
                         <Right>

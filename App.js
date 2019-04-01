@@ -23,7 +23,6 @@ class App extends React.Component {
   }
   componentDidMount() {
     if (getToken()) {
-      console.log(getToken())
       this.props.navigation.navigate('MyCourses')
     } else {
       this.props.navigation.navigate('Home')
