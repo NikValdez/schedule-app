@@ -54,6 +54,9 @@ class MyCourses extends Component {
   fullSchedule = () => {
     this.props.navigation.navigate('FullSchedule')
   }
+  test = () => {
+    this.props.navigation.navigate('Test')
+  }
   render() {
     return (
       <ApolloProvider client={client}>
@@ -98,6 +101,7 @@ class MyCourses extends Component {
                 ))}
                 <Button onPress={this.goToPost} title="Cal" />
                 <Button onPress={this.fullSchedule} title="Full Schedule" />
+                <Button onPress={this.test} title="Test" />
               </View>
             )
           }}

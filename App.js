@@ -9,6 +9,7 @@ import MyCourses from './components/MyCourses'
 import Post from './components/Post'
 import Signin from './components/Signin'
 import navStyles from './components/styles/navStyles'
+import Test from './components/Test'
 import { getToken } from './loginUtils'
 
 const client = new ApolloClient({
@@ -59,7 +60,8 @@ const AppNavigator = createStackNavigator(
     Courses: Courses,
     Signin: Signin,
     MyCourses: MyCourses,
-    FullSchedule: FullSchedule
+    FullSchedule: FullSchedule,
+    Test: Test
   },
   { initialRouteName: 'Home' }
 )
