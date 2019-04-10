@@ -3,10 +3,10 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { StyleSheet, View } from 'react-native'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
+import Calendar from './components/Calendar'
 import Courses from './components/Courses'
 import FullSchedule from './components/FullSchedule'
 import MyCourses from './components/MyCourses'
-import Post from './components/Post'
 import Signin from './components/Signin'
 import navStyles from './components/styles/navStyles'
 import Test from './components/Test'
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 const AppNavigator = createStackNavigator(
   {
     Home: App,
-    Post: Post,
+    Calendar: Calendar,
     Courses: Courses,
     Signin: Signin,
     MyCourses: MyCourses,

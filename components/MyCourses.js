@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons'
 import ApolloClient from 'apollo-boost'
 import gql from 'graphql-tag'
 import {
@@ -13,7 +14,9 @@ import {
 import React, { Component } from 'react'
 import { ApolloProvider, Query } from 'react-apollo'
 import { Button, Text, View } from 'react-native'
-import { logout } from '../loginUtils'
+import { createAppContainer, createDrawerNavigator } from 'react-navigation'
+import Courses from './Courses'
+import FullSchedule from './FullSchedule'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4444',
@@ -43,19 +46,23 @@ const MY_COURSES_QUERY = gql`
 `
 
 class MyCourses extends Component {
-  removeToken = () => {
-    logout()
-    this.props.navigation.navigate('Home')
-  }
+  // removeToken = () => {
+  //   logout()
+  //   this.props.navigation.navigate('Home')
+  // }
 
-  goToPost = () => {
-    this.props.navigation.navigate('Post')
-  }
-  fullSchedule = () => {
-    this.props.navigation.navigate('FullSchedule')
-  }
-  test = () => {
-    this.props.navigation.navigate('Test')
+  // goToCalendar = () => {
+  //   this.props.navigation.navigate('Calendar')
+  // }
+  // fullSchedule = () => {
+  //   this.props.navigation.navigate('FullSchedule')
+  // }
+  // test = () => {
+  //   this.props.navigation.navigate('Test')
+  // }
+
+  toggleDrawer = () => {
+    this.props.navigation.toggleDrawer()
   }
   render() {
     return (
@@ -73,10 +80,17 @@ class MyCourses extends Component {
                     backgroundColor: '#fffcdf'
                   }}
                 >
+                  <Ionicons
+                    name="md-menu"
+                    size={32}
+                    onPress={this.toggleDrawer}
+                  />
+
                   <Left />
                   <Body>
                     <Title>My Courses</Title>
                   </Body>
+
                   <Right />
                   <Button onPress={this.removeToken} title="Logout" />
                 </Header>
@@ -99,9 +113,10 @@ class MyCourses extends Component {
                     </Card>
                   </View>
                 ))}
-                <Button onPress={this.goToPost} title="Cal" />
+                {/* <Button onPress={this.goToCalendar} title="Calendar" />
                 <Button onPress={this.fullSchedule} title="Full Schedule" />
                 <Button onPress={this.test} title="Test" />
+                <Button onPress={this.openDrawer} title="menu" /> */}
               </View>
             )
           }}
@@ -111,4 +126,35 @@ class MyCourses extends Component {
   }
 }
 
-export default MyCourses
+const MainNavigator = createDrawerNavigator({
+  MyCourses: {
+    navigationOptions: {
+      drawerIcon: ({ tintColor }) => (
+        <Ionicons name="md-home" style={{ color: tintColor }} />
+      ),
+      drawerLabel: 'MyCourses'
+    },
+    screen: MyCourses
+  },
+  FullSchedule: {
+    navigationOptions: {
+      drawerIcon: ({ tintColor }) => (
+        <Ionicons name="md-home" style={{ color: tintColor }} />
+      ),
+      drawerLabel: 'FullSchedule'
+    },
+    screen: FullSchedule
+  },
+
+  Courses: {
+    navigationOptions: {
+      drawerIcon: ({ tintColor }) => (
+        <Ionicons name="md-settings" style={{ color: tintColor }} />
+      ),
+      drawerLabel: 'Courses'
+    },
+    screen: Courses
+  }
+})
+
+export default createAppContainer(MainNavigator)
